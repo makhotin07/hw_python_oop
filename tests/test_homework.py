@@ -359,7 +359,7 @@ def test_main():
 def test_main_output(input_data, expected):
     with Capturing() as get_message_output:
         training = homework.read_package(*input_data)
-        homework.main(training)
+        homework.main(training, " ")
     assert get_message_output == expected, (
         'Метод `main` должен печатать результат в консоль.\n'
     )
