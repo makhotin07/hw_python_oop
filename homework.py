@@ -133,33 +133,13 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
-    instance = None
-    if workout_type == "SWM":
-        mapping = {
-            "action": data[0],
-            "duration": data[1],
-            "weight": data[2],
-            "length_pool": data[3],
-            "count_pool": data[4]
-        }
-        instance = Swimming(**mapping)
-    if workout_type == "RUN":
 
-        mapping = {
-            "action": data[0],
-            "duration": data[1],
-            "weight": data[2]
-        }
-        instance = Running(**mapping)
-    if workout_type == "WLK":
-        mapping = {
-            "action": data[0],
-            "duration": data[1],
-            "weight": data[2],
-            "height": data[3]
-        }
-        instance = SportsWalking(**mapping)
-    return instance
+    package_mapping = {
+        "SWM": Swimming(*data),
+        "RUN": Running(*data),
+        "WLK": SportsWalking(*data)
+    }
+    return package_mapping.get(workout_type, None)
 
 
 def main(training: Training) -> None:
